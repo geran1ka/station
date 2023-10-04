@@ -2,6 +2,11 @@ export class Car {
   #maxTank;//сокрытие данных maxTank
 
   constructor(brand, model, maxTank) {
+    const proto = Object.getPrototypeOf(this);
+    if(proto.constructor === Car) {
+      throw new Error('Abstract class');
+    }
+
     this.brand = brand;
     this.model = model;
     this.#maxTank = maxTank;
@@ -61,6 +66,10 @@ export class PassangerCar extends Car {
     super(brand, model, maxTank);
     this.typeFuel = typeFuel;
   }
+
+  getTitle() {
+    return `Автомобиль${this.brand} ${this.model}`;
+  }
 }
 
 export class Truck extends Car {
@@ -69,5 +78,32 @@ export class Truck extends Car {
     super(brand, model, maxTank);
     this.typeFuel = typeFuel;
   }
+
+  getTitle() {
+    return `Грузовик${this.brand} ${this.model}`;
+  }
 }
+
+// console.clear();
+// console.log(new PassangerCar('ВАЗ', '2101', 30));
+
+// const singelton = () => {
+//   class Singelton {
+//     constructor(x) {
+//       if (Singelton.instance) {
+//         return Singelton.instance;
+//       }
+
+//       this.a = 5;
+//       this.b = x;
+//       Singelton.instance = this;
+//     }
+//   }
+//   console.log(new Singelton(35));
+// console.log(new Singelton(5));
+// console.log(new Singelton(3));
+// }
+// singelton()
+
+
 

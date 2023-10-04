@@ -58,6 +58,7 @@ export class RenderStation {
 
         if (column.car === null) {
           clearInterval(timerId);
+          column.amountFuel = 0;
           columnAmountFuelSpan.textContent = total;
         }
       }, 1000);
