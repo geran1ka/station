@@ -35,25 +35,7 @@ const getTestCar = () => {
   return typeBool ? new PassangerCar(...randomCar) : new Truck(...randomCar);
 };
 
-// const station1 = new Station([
-//   {
-//     type: 'petrol',
-//     count: 2,
-//     speed: 5,
-//   },
-//   {
-//     type: 'diesel',
-//     count: 1,
-//     speed: 10,
-//   },
-//   {
-//     type: 'gas',
-//     count: 1,
-//     speed: 5,
-//   },
-// ], '.app');
-
-const station2 = new RenderStation('.app', [
+const station = new RenderStation('.app', [
   {
     type: 'petrol',
     count: 2,
@@ -71,17 +53,17 @@ const station2 = new RenderStation('.app', [
   },
 ]);
 
-const station = new RenderStation('.app', [
-  {
-    type: 'petrol',
-  },
-  {
-    type: 'diesel',
-  },
-  {
-    type: 'gas',
-  },
-]);
+// const station = new RenderStation('.app', [
+//   {
+//     type: 'petrol',
+//   },
+//   {
+//     type: 'diesel',
+//   },
+//   {
+//     type: 'gas',
+//   },
+// ]);
 
 open.addEventListener('click', () => {
   station.init();

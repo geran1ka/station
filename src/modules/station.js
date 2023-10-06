@@ -5,10 +5,8 @@ export class Station {
   #filling = [];
   #ready = [];
 
-  constructor(typeStation, renderApp = null) {
+  constructor(typeStation) {
     this.typeStation = typeStation;
-    this.renderApp = renderApp;
-    this.renderStation = null;
   }
 
   checkOptionStation(obj) {
@@ -32,7 +30,7 @@ export class Station {
   init() {
     setInterval(() => {
       this.checkQueueToFilling();
-    }, 2000);
+    }, 1000);
   }
 
   createColumns() {
@@ -67,7 +65,6 @@ export class Station {
     column.amountFuel = 0;
 
     const timerId = setInterval(() => {
-      console.log('column: ', column.amountFuel);
       nowTank += column.speed;
       if (amountOfFuelFilled + column.speed < needPetrol) {
         amountOfFuelFilled += column.speed;
