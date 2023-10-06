@@ -1,11 +1,15 @@
-export class RenderStation {
-  constructor(app, station) {
+import { Station } from "./station";
+
+export class RenderStation extends Station {
+  constructor(app, typeStation) {
+    super(typeStation)
     this.app = app;
-    this.station = station;
-    this.init();
   }
 
   init() {
+    super.init();
+    super.createColumns();
+
     this.wrapper = document.createElement('div');
     this.wrapper.style.cssText = `
       display: grid;
@@ -14,11 +18,10 @@ export class RenderStation {
       align-items: top;
       justify-content: space-between;
     `;
-
-    this.renderStation();
+    this.render();
   }
 
-  renderStation() {
+  render() {
     this.wrapper.textContent = '';
     const queueList = this.createQueue();
     const columns = this.createColumns();
@@ -26,9 +29,19 @@ export class RenderStation {
     document.querySelector(this.app).append(this.wrapper);
   }
 
+  checkQueueToFilling() {
+    super.checkQueueToFilling()
+    this.render();
+  }
+
+  addCarQueue(car) {
+    super.addCarQueue(car)
+    this.render();
+  }
+
   createQueue() {
     const list = document.createElement('ul');
-    this.station.queue.forEach(car => {
+    this.queue.forEach(car => {
       const item = document.createElement('li');
       item.textContent = `${car.getTitle()}`;
       item.classList.add(car.typeCar);
@@ -40,7 +53,7 @@ export class RenderStation {
   createColumns() {
     const columns = document.createElement('ul');
     columns.classList.add('columns');
-    this.station.filling.forEach(column => {
+    this.filling.forEach(column => {
       const itemColumn = document.createElement('li');
       itemColumn.classList.add(column.type);
 

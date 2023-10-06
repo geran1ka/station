@@ -1,5 +1,4 @@
 import {Column} from './column';
-import {RenderStation} from './renderStation';
 
 export class Station {
   #queue = [];
@@ -31,19 +30,9 @@ export class Station {
   }
 
   init() {
-    this.createColumns();
-
-    this.checkRenderApp();
-
     setInterval(() => {
       this.checkQueueToFilling();
     }, 2000);
-  }
-
-  checkRenderApp() {
-    if (this.renderApp) {
-      this.renderStation = new RenderStation(this.renderApp, this);
-    }
   }
 
   createColumns() {
@@ -63,7 +52,6 @@ export class Station {
             this.#queue[i].typeFuel === this.#filling[j].type) {
             this.#filling[j].car = this.#queue.splice(i, 1)[0];
             this.fillingGo(this.#filling[j]);
-            this.renderStation.renderStation();
             break;
           }
         }
@@ -102,11 +90,9 @@ export class Station {
 
   leaveClient({car, total}) {
     this.#ready.push(car);
-    this.renderStation.renderStation();
   }
 
   addCarQueue(car) {
     this.#queue.push(car);
-    this.renderStation.renderStation();
   }
 }
